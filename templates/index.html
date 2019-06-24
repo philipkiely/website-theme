@@ -1,15 +1,17 @@
 {% extends "base.html" %}
 
-{% block title %}{{ SITENAME }}{% endblock %}
+{% block title %}Essays | philipkiely.com{% endblock %}
 
 {% block content %}
 <div class="row">
- <div class="col-md-8">
-  <h1>{{ SITENAME }}</h1>
+ <div class="col-12 col-md-8 offset-md-2">
+  <h1><code class="post-info">{{ SITENAME }}</code></h1>
+  <hr/>
   {% for article in articles %}
-   <h2><a href="/{{ article.slug }}.html">{{ article.title }}</a></h2>
-   <label>Posted on <strong>{{ article.date }}</strong></label>
-   {{ article.content|truncate(110) }}
+   <h3><a href="{{ SITEURL }}/{{ article.slug }}.html">{{ article.title }}</a></h3>
+   <code class="post-info">| First Posted <b>{{ article.date|strftime('%d %B %Y') }}</b> | Last Edited <b>{{ article.modified|strftime('%d %B %Y') }}</b> |{% for author in article.authors %} {{ author }} |{% endfor %}</code>
+   {{ article.summary }}
+   <hr/>
   {% else %}
    No posts yet!
   {% endfor %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}{{ SITENAME }} Tag{% endblock %}
+
+{% block content %}
+<div class="row">
+ <div class="col-md-8">
+  <h1>{{ tag }}</h1>
+  {% for article in articles %}
+  <a href="{{ SITEURL }}/{{ article.slug }}.html">{{ article.title }}</a>
+  <label>Posted <strong>{{ article.date|strftime('%d %B %Y') }}</strong></label>
+  {{ article.content|truncate(110) }}
+  {% endfor %}
+ </div>
+</div>
+{% endblock %}

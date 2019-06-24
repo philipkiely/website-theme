@@ -1,13 +1,39 @@
 {% extends "base.html" %}
 
-{% block title %}{{ article.title }}{% endblock %}
+{% block title %}{{ article.title|truncate(30) }}{% endblock %}
 
 {% block content %}
 <div class="row">
- <div class="col-md-8">
+ <div class="col-md-8 offset-md-2">
   <h1>{{ article.title }}</h1>
-  <label>Posted on <strong>{{ article.date }}</strong></label>
+  <code class="post-info">| First Posted <b>{{ article.date|strftime('%d %B %Y') }}</b> | Last Edited <b>{{ article.modified|strftime('%d %B %Y') }}</b> |{% for author in article.authors %} {{ author }} |{% endfor %}</code>
+  <hr/>
   {{ article.content }}
+  <hr/>
+  <p>Thanks for reading! For more, sign up for my email newsletter for fresh, original content on programming, technology, and business delivered to your inbox weekly.</p>
+  <form onsubmit="emailListSignup();return false;">
+    <div class="form-row">
+      <div id="invalid-email" class="alert alert-danger col-sm-12" role="alert" hidden>
+          Please enter a valid email.
+      </div>
+      <div id="valid-email" class="alert alert-success col-sm-12" role="alert" hidden>
+          Registration sent!
+      </div>
+      <div class="col-sm-12 col-md-9 mb-2 mb-md-0">
+        <input type="email" class="form-control form-control-lg" id="get-email" placeholder="Enter your email...">
+      </div>
+      <div class="col-sm-12 col-md-3">
+        <button type="submit" class="btn btn-block btn-lg btn-primary">Sign Up!</button>
+      </div>
+    </div>
+  </form>
+  <br/>
+  <hr/>
  </div>
 </div>
+<script>
+   $(document).ready(function () {
+      $("table").attr("class","table table-condensed table-bordered");
+   });
+</script>
 {% endblock %}

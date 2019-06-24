@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}{{ SITENAME }} Authors{% endblock %}
+
+{% block content %}
+{% for author in authors %}
+    <a href="{{ SITEURL }}/author/{{ author.page_name }}.html">{{ author.author }}</a>
+{% endfor %}
+{% endblock %}
