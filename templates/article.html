@@ -8,6 +8,15 @@
   <h1>{{ article.title }}</h1>
   <code class="post-info">| First Posted <b>{{ article.date|strftime('%d %B %Y') }}</b> | Last Edited <b>{{ article.modified|strftime('%d %B %Y') }}</b> |{% for author in article.authors %} {{ author }} |{% endfor %}</code>
   <hr/>
+  <div id="audio-player">
+      You can listen to this essay
+      <audio controls preload="metadata">
+          <source src="{{ article.pollylink }}" type="audio/mpeg">
+          Your browser does not support the audio element.
+      </audio>
+      or <a id="audio-link" href="{{ article.pollylink }}">download the mp3 file</a>.
+      <hr/>
+  </div>
   {{ article.content }}
   <hr/>
   <p>Thanks for reading! For more, sign up for my email newsletter for fresh, original content on programming, technology, and business delivered to your inbox weekly.</p>
@@ -35,5 +44,8 @@
    $(document).ready(function () {
       $("table").attr("class","table table-condensed table-bordered");
    });
+   if (document.getElementById("audio-link").href == "{{ SITEURL }}/{{ article.slug }}.html" || document.getElementById("audio-link").href == "http://127.0.0.1:8000/{{ article.slug }}.html") {
+       document.getElementById("audio-player").hidden = true;
+   }
 </script>
 {% endblock %}
