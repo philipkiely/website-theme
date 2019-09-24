@@ -7,6 +7,24 @@
  <div class="col-12 col-md-8 offset-md-2">
   <h1><code class="post-info">{{ SITENAME }}</code></h1>
   <hr/>
+  <form onsubmit="emailListSignup();return false;">
+    <div class="form-row">
+      <p>Join developers worldwide in receiving original content every month.</p>
+      <div id="invalid-email" class="alert alert-danger col-sm-12" role="alert" hidden>
+          Please enter a valid email.
+      </div>
+      <div id="valid-email" class="alert alert-success col-sm-12" role="alert" hidden>
+          Registration sent!
+      </div>
+      <div class="col-sm-12 col-md-9 mb-2 mb-md-0">
+        <input type="email" class="form-control form-control-lg" id="get-email" placeholder="Enter your email...">
+      </div>
+      <div class="col-sm-12 col-md-3">
+        <button type="submit" class="btn btn-block btn-lg btn-primary">Sign Up!</button>
+      </div>
+    </div>
+  </form>
+  <hr/>
   {% for article in articles %}
    <h3><a href="{{ SITEURL }}/{{ article.slug }}.html">{{ article.title }}</a></h3>
    <code class="post-info">| First Posted <b>{{ article.date|strftime('%d %B %Y') }}</b> | Last Edited <b>{{ article.modified|strftime('%d %B %Y') }}</b> |{% for author in article.authors %} {{ author }} |{% endfor %}</code>
